@@ -1,0 +1,91 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname hw4-problem3) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Problem 3
+
+;; Consider the following data definitions and interpretations.
+
+(define-struct sneaker [is-running])
+;; A ShoeKind is one of:
+;; - (make-sneaker Boolean)
+;; - "dress"
+;; - "boots"
+;; - "other"
+;; Interpretation: Represents some shoe varieties. In (make-sneaker r),
+;; r is #true when the sneaker is a running shoe. The "other"
+;; variety is used for the many other kinds of shoes that aren't listed.
+
+(define-struct shoe [brand laced kind])
+;; A Shoe is a (make-shoe String Boolean ShoeKind).
+;; Interpretation: A (make-shoe b l k) represents a shoe made by b,
+;; of kind k, which has laces when l is #true, and is a slip-on shoe
+;; when l is #false.
+
+;; Part A
+
+;; Define five distinct examples of Shoe data. Make sure that your
+;; examples are representative, and are distinct enough to cover all the
+;; interesting differences in this data.
+
+;; [TODO] Five examples
+
+(define SHOE-1 (make-shoe "Uggs" #false "boots"))
+(define SHOE-2 (make-shoe "Adidas" #true (make-sneaker #true)))
+(define SHOE-3 (make-shoe "Nike" #true "dress"))
+(define SHOE-4 (make-shoe "Converse" #true "other"))
+(define SHOE-5 (make-shoe "Reebok" #false (make-sneaker #false)))
+
+;; Part B
+
+;; Write templates for all data definitions above.
+
+;; [TODO] Templates
+
+(define (sneaker-temp sk)
+  (... (sneaker-is-running? sk) ...))
+
+(define (kind-temp k)
+  (...
+   (cond
+     [(sneaker? s) (sneaker-temp s)] 
+     [string=? s "dress" ... ]
+     [string=? s "boots" ...]
+     [string=? s "others" ...]))) 
+
+(define (shoe-temp s)
+  (... (shoe-brand s) ...
+       (shoe-laced? s) ...
+       (shoe-kind s) (kind-temp s)))
+
+
+
+;; Part C
+
+;; Consider the following function definitions:
+
+(define (shoe-type u)
+  (cond
+    [(sneaker? u)
+     (if (sneaker-is-running u)
+         "running shoes"
+         "sneakers")]
+    [(string=? u "dress") "dress shoes"]
+    [(string=? u "boots") "boots"]
+    [(string=? u "other") ""]))
+
+(define (shoe-title t)
+  (string-append (shoe-type (shoe-kind t)) " by " (shoe-brand t)))
+
+;; Write the signatures for the functions foo and bar.
+
+;; Hint: The names "foo", "bar", "u", and "t" are not helpful. It may help you
+;; to come up with better names as well. However, this is completely optional.
+;; If you do so, feel free to change the names in the code above.
+
+;; [TODO] Better signatures for foo and bar
+
+; Shoe-Type : Shoe -> String
+; Shoe-Title : Shoe -> String
+
+

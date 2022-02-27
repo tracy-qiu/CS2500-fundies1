@@ -1,0 +1,60 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname hw10-master) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Problem 1
+
+;; In most organizations, employeers are arranged in a hierarchy called an
+;; "organization chart" or org-chart. For example, here is a portion of the 
+;; org-chart for Northeastern:
+;;
+;;                      Joseph E. Aoun
+;;                      (President)
+;;                           |
+;;                      The Cabinet                                   
+;;                           |
+;;       +-------------------+-------------------+
+;;   Karl Reid      Madeleine Estabrook    David Madigan
+;; (Chief Inclusion  (Student Affairs)    (Academic Affairs)
+;;     Officer)                                 |
+;;                    +-------------------------+---------+
+;;                    |                                   |
+;;              Administration                      Academic Deans
+;;                    |                                   |
+;;                    |                  +----------------+---------------+
+;;                    |                  |                |               | 
+;;              Thomas Sheahan      Alan Mislove    Carmen Sceppa    Uta Poiger
+;;         (Curriculum & Programs)    (Khoury)         (Bouve)     (Social Sciences &
+;;                                                                      Humanities)
+;;
+;; The people in this chart have a name (obviously) and a title. Each also
+;; has a number of "direct reports" (possible no direct reports). In addition,
+;; each set of direct reports is grouped together with a label. E.g., the three
+;; groups above are "The Cabinet", "Administration", and "Academic Affairs".
+;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Part A
+;;
+;; Design data called OrgChart to represent an org-chart.
+;; One of your examples must have *all* the information in the org-chart picture
+;; shown above.
+
+;; [TODO] Data design
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Part B
+
+;; Design the function num-peeps that counts how many people are in an OrgChart.
+
+;; [TODO] Function design
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Part C
+
+;; Design the function full-title that consumes an OrgChart and the name of
+;; an organization, and produces an OrgChart that adds the "(organization name)"
+;; to the title for each person in the OrgChart.
+

@@ -1,0 +1,100 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname hw4-problem2) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Problem 2
+
+;; This problem has a partially-completed data design for representing DNA
+;; sequences. A DNA molecule is a long sequence of four nucleotides: adenine,
+;; cytosine, guanine, and thymine. (More information here:
+;; https://en.wikipedia.org/wiki/DNA.)
+
+(define-struct adenine [rest])
+(define-struct guanine [rest])
+(define-struct cytosine [rest])
+(define-struct thymine [rest])
+;; A DNASeq is one of:
+;; - (make-adenine DNASeq)
+;; - (make-guanine DNASeq)
+;; - (make-cytosine DNASeq)
+;; - (make-thymine DNASeq)
+;; - "empty sequence"
+;; Interpretation: A DNASeq represents a sequence of nucleotides.
+
+;; Part A
+
+;; Write at least three examples of DNASeq. Across all examples, ensure you
+;; have an example of all nucleotides.
+
+;; [TODO] Three 
+(define DNASEQ1-1 (make-adenine "empty sequence"))
+(define DNASEQ1-2 (make-cytosine DNASEQ1-1))
+(define DNASEQ1-3 (make-thymine DNASEQ1-2))
+(define DNASEQ1 (make-guanine DNASEQ1-3))
+
+(define DNASEQ2-1 (make-guanine "empty sequence"))
+(define DNASEQ2-2 (make-thymine DNASEQ2-1))
+(define DNASEQ2-3 (make-cytosine DNASEQ2-2))
+(define DNASEQ2 (make-adenine DNASEQ2-3))
+
+(define DNASEQ3-1 (make-thymine "empty sequence"))
+(define DNASEQ3-2 (make-adenine DNASEQ3-1))
+(define DNASEQ3-3 (make-guanine DNASEQ3-2))
+(define DNASEQ3 (make-cytosine DNASEQ3-3))
+
+
+
+;; Part B
+
+;; Write a template for DNASeq.
+; An DNASeq is one of:
+;; - Adenine
+;; - Guanine
+;; - Cytosine
+;; - Thymine
+;; - "empty sequence"
+;; Interpretation: A DNASeq represents a sequence of nucleotides.
+
+;; [TODO] Template
+(define (dnaseq-temp d)
+  (...
+   (cond
+     [(adenine? d) ... (adenine-rest d) ...]
+     [(guanine? d) ... (guanine-rest d) ...]
+     [(cytosine? d) ... (cytosine-rest d) ...]
+     [(thymine? d) ... (thymine-rest d) ...])))
+
+;; Part C
+
+;; Every  DNA sequence has a complementary sequence, which substitutes
+;; As with Ts, Ts with As, Cs with Gs, and Gs with Cs. Design a function
+;; to calculate the complement of a DNA sequence.
+
+;; [TODO] Function design recipe
+
+(define DNASEQ1-1u (make-thymine "empty sequence"))
+(define DNASEQ1-2u (make-guanine DNASEQ1-1u))
+(define DNASEQ1-3u (make-adenine DNASEQ1-2u)) 
+(define DNASEQ1u (make-cytosine DNASEQ1-3u))
+
+#|
+(define DNASEQ1-1 (make-adenine "empty sequence"))
+(define DNASEQ1-2 (make-cytosine DNASEQ1-1))
+(define DNASEQ1-3 (make-thymine DNASEQ1-2))
+(define DNASEQ1 (make-guanine DNASEQ1-3))
+|#
+
+(check-expect (pair-dna DNASEQ1) DNASEQ1u)
+
+
+(define (complementary-dnaseq b)
+  
+
+
+(define (pair-dna d)
+  (cond
+     [(adenine? d) (make-thymine (adenine-rest d))]
+     [(guanine? d) (make-cytosine (guanine-rest d))]
+     [(cytosine? d) (make-guanine (cytosine-rest d))]
+     [(thymine? d) (make-adenine (thymine-rest d))]))
+
