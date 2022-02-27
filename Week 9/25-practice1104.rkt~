@@ -1,0 +1,166 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname 25-practice1104) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+; TODO #1
+; Design the function prizes that takes two parallel lists
+; (one of names, the other of prize amounts) and produces a
+; list that announces who gets what. If we run out of prizes,
+; the person gets 0.
+
+; prizes : [List-of String] [List-of Number] -> [List-of String]
+; Awards each person in the first list a prize amount from the second;
+; if run out of prizes, person gets 0 :(
+
+(check-expect (prizes (list "alice" "bob" "carol") (list 100 50 10))
+              (list "alice gets $100"
+                    "bob gets $50"
+                    "carol gets $10"))
+ 
+(check-expect (prizes (list "alice" "bob" "carol" "dan") (list 100 50))
+              (list "alice gets $100"
+                    "bob gets $50"
+                    "carol gets $0"
+                    "dan gets $0"))
+ 
+(check-expect (prizes (list "alice" "bob") (list 100 50 10))
+              (list "alice gets $100"
+                    "bob gets $50"))
+
+(define (los-lon-temp los lon)
+  (...
+   (cond
+     [(and (empty? los) (empty? lon)) ...]
+     [(and (empty? los) (cons? lon)) ...
+      (first lon) ... (los-lon-temp los (rest lon)) ...]
+     [(and (cons? los) (empty? lon)) ...
+      (first lon) ... (los-lon-temp los (rest lon)) ...]
+     [(and (cons? los) (cons? lon)) ...
+      (first los) ...
+      (first lon) ...
+      (los-lon-temp (rest los) (rest lon)) ...])))
+     
+(define (los-lon-temp-simple los lon)
+  (...
+   (cond
+     [(empty? los) ...] ; empty los cons lon or cons los empty lon is not possible 
+     [(cons? los) ...]))) ; we know if one if empty then 
+
+(define (prizes los lon)
+  (local [; give-moneys : String Number -> String
+          ; "name gets $number"
+          (define (give-moneys name amount)
+            (string-append name
+                           " gets $"
+                           (number->string amount)))]
+   (cond
+     [(empty? los) '()]
+     [(and (cons? los) (empty? lon)) ; give $0 to name, and dont forget about others 
+      (cons
+      (give-moneys (first los) 0)
+      (prizes (rest los) lon))]
+     [(and (cons? los) (cons? lon)) ; give $number to name, and dont forget about others 
+      (cons
+      (give-moneys (first los) (first lon))
+      (prizes (rest los) (rest lon)))])))
+
+
+
+; TODO #2
+; Design the function mysort that accepts a list of numbers
+; and returns a sorted version of that list. Use a list
+; abstraction, but not sort.
+
+; mysort : [List-of Number] -> [SortedList-of Number]
+; Sorts a list of numbers
+
+(check-expect (mysort '()) '())
+(check-expect (mysort (list 9 2 5)) (list 2 5 9))
+(check-expect (mysort (list 8 6 7 5 3 0 9)) (list 0 3 5 6 7 8 9))
+
+; Number [SortedList-of Number] -> [SortedList-of Number]
+; 8 [] -> [8]
+; 6 [8] -> [6 8]
+; 7 [6 8] -> [6 7 8]
+; 5 [6 7 8] -> [5 6 7 8]
+; 3 [5 6 7 8] -> [3 5 6 7 8]
+; 0 [3 5 6 7 8] -> [0 3 5 6 7 8]
+; 9 [0 3 5 6 7 8] -> [0 3 5 6 7 8 9]
+
+; insertion sort 
+(define (mysort lon)
+  (local [; insert : Number [SortedList-of Number] -> [SortedList-of Number]
+          ; inserts the new number into the supplied sorted list
+          (define (insert n slon)
+            (cond
+              [(empty? slon) (list n)]
+              [(cons? slon)
+               (if (<= n (first slon))
+                   (cons n slon)
+                   (cons (first slon) (insert n (rest slon))))]))]
+    (foldr insert '() lon)))
+
+
+
+
+; TODO #3
+; Design the function checklist->predicate that accepts a
+; [Checklist Z] and returns a single predicate that only
+; returns true if all predicates in the checklist return true.
+
+; A [Checklist Z] is a [List-of [Z -> Boolean]]
+; Interpretation: A series of tests
+
+; checklist->predicate : (Z) [Checklist Z] -> [Z -> Boolean]
+; Returns a predicte that holds true only if all predicates return true
+
+#|
+(check-expect (filter (checklist->predicate (list string? (λ (s) (= (string-length s) 1))))
+                      '())
+              '())
+
+(check-expect (filter (checklist->predicate (list string? (λ (s) (= (string-length s) 1))))
+                      (list "a" "bb" "c" "ddd"))
+              (list "a" "c"))
+
+(check-expect (filter (checklist->predicate (list even? positive?))
+                      (list -2 -1 0 1 2))
+              (list 2))
+|#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+; TODO #4
+
+; Design the function rev that accepts a list and
+; reverses it. You must use a pre-defined list abstraction.
+
+; rev : [List-of Any] -> [List-of Any]
+; Reverse a list
+#| 
+(check-expect (rev '()) '())
+(check-expect (rev (list 1 2 3)) (list 3 2 1))
+(check-expect (rev (list "a" "b" "c")) (list "c" "b" "a"))
+|#

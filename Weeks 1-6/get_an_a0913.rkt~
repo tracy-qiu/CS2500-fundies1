@@ -1,0 +1,14 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname get_an_a0913) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+; gonna-get-an-A? : Number -> Boolean
+; Returns whether or not youre going to get an A, given your grade
+; Examples:
+; (gonna-get-an-A? 10) should be #false 
+; (gonna-get-an-A? 89) should be #false
+; (gonna-get-an-A? 90) should be #true
+; (gonna-get-an-A? 95) should be #true
+
+
+(define (gonna-get-an-A? numeric-grade)
+  (> numeric-grade 90) 

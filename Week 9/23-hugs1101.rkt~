@@ -1,0 +1,48 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname 23-hugs1101) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+(require 2htdp/image)
+(require 2htdp/universe)
+ 
+; hug-counter : ? -> Nat
+; Output how many clicks have been made until the user exits
+; reads/writes to supplied filename 
+ 
+(define (hug-counter filename)
+  (big-bang 0
+    [to-draw draw-count]
+    [on-mouse handle-click]))
+ 
+(define BG (text "🐼" 200 "black"))
+; https://en.wikipedia.org/wiki/File:Panda_hug_by_comicmasterx.jpg
+ 
+(define TEXT-SIZE 30)
+(define TEXT-COLOR "black")
+ 
+; draw-count : Nat -> Image
+; Draw the count of clicks made
+ 
+(check-expect (draw-count 5)
+              (overlay/align
+               "right" "top"
+               (text "5" TEXT-SIZE TEXT-COLOR)
+               BG))
+ 
+(define (draw-count n)
+  (overlay/align
+   "right" "top"
+   (text (number->string n) TEXT-SIZE TEXT-COLOR)
+   BG))
+ 
+; handle-click : Nat Number Number MouseEvent -> Nat
+; add1 if click
+ 
+(check-expect (handle-click 3 0 0 "button-down") 4)
+(check-expect (handle-click 3 0 0 "button-up") 3)
+ 
+(define (handle-click n x y me)
+  (cond
+    [(mouse=? me "button-down") (add1 n)]
+    [else n]))
+ 
+(hug-counter "hugs.txt")

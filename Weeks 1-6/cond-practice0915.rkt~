@@ -1,0 +1,12 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname cond-practice0915) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+; Design the data for temperature.
+
+; Design the data for an MBTA line
+
+; Design a function convert that converts a Celcius
+; temperature to a Farenheit one.
+
+; Design the function stops-atNU? that dtermines
+; if a line stops at Northeastern. 
