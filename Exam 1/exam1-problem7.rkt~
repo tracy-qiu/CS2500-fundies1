@@ -1,0 +1,19 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname |exam1|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Problem 7
+;;
+;; *This is a programming problem that you should do in DrRacket.*
+;;
+;; You have been tasked with building a web-based takeout menu for a pizzeria.
+;; The pizzeria sells pizzas and soft drinks. Every pizza has a name
+;; (e.g., "margherita" or "pepperoni"), and size (small, medium, or large).
+;; Soft drinks only have a name (e.g., "Pepsi" or "Harmony Springs Cola").
+;;
+;; Design a data definition that represents a single menu item for the pizzeria.
+;; Ensure you follow the entire data design recipe for all data that you design.
+
+;; [TODO] Data designs
+
+
